@@ -7,7 +7,7 @@ services:
       - LOG_LEVEL=INFO
       - TZ=UTC-1
       - DB_TYPE=postgres 
-      - DB_HOST=172.18.0.2
+      - DB_HOST=loomis-pg
       - DB_NAME=openclinica
       - DB_USER=clinica
       - DB_PASS=clinica 
