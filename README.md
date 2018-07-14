@@ -11,3 +11,9 @@ The project is based on the work of others. Specifically:
 - Jens Piegsa. See: [https://hub.docker.com/r/piegsaj/openclinica/](https://hub.docker.com/r/piegsaj/openclinica/)
 
 - The BRC Clinical Informatics Team. (Work not publicly available.)
+
+## **WARNING** -- THIS PROJECT DOES NOT WORK *YET*
+
+- This notice will be removed when there is a minimal working project.
+- Limitations will be noted, until proper 'production-ready status' is reached.
+- Suffice to say, this is a work in progress ...

@@ -3,14 +3,25 @@ version: '3.6'
 services:
   loomis-oc:
     image: piegsaj/openclinica
-    env_file: loomis_oc.env
+    environment:
+      - LOG_LEVEL=INFO
+      - TZ=UTC-1
+      - DB_TYPE=postgres 
+      - DB_HOST=172.18.0.2
+      - DB_NAME=openclinica
+      - DB_USER=clinica
+      - DB_PASS=clinica 
+      - DB_PORT=5432
+      - SUPPORT_URL="https://www.openclinica.com/community-edition-open-source-edc/" \ 
     volumes: 
       - loomis_oc-data:/usr/local/tomcat/openclinica.data
     ports: 
       - 80:8080
   loomis-pg:
     image: postgres:9.5
-    env_file: loomis_pg.env
+    environment: 
+      - POSTGRES_INITDB_ARGS="-E 'UTF-8'"
+      - POSTGRES_PASSWORD=postgres123
     ports: 
       - 5432:5432
     volumes: 
