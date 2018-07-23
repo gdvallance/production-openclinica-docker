@@ -1,11 +1,11 @@
+# Forked from  Jens Piegsa (piegsa@gmail.com)
+
 # Dockerfile for OpenClinica
 #
 # - for testing purposes only
 # - needs an additional postgres container
 
 FROM tomcat:7.0-jre8
-
-MAINTAINER Forked from  Jens Piegsa (piegsa@gmail.com)
 
 ENV  OC_HOME              $CATALINA_HOME/webapps/OpenClinica
 ENV  OC_WS_HOME           $CATALINA_HOME/webapps/OpenClinica-ws
