@@ -15,14 +15,11 @@ ENV  DATABASE_NAME        default
 
 COPY run.sh               /run.sh
 
-RUN  mkdir /tmp/oc
-RUN  cd /tmp/oc
+COPY openclinica.zip /tmp/openclinica.zip
+COPY openclinica-ws.zip /tmp/openclinica-ws.zip
 
-COPY openclinica.zip /tmp/oc/openclinica.zip
-COPY openclinica-ws.zip /tmp/oc/openclinica-ws.zip
-
-RUN unzip -o /tmp/oc/openclinica.zip -d /tmp/oc
-RUN unzip -o /tmp/oc/openclinica-ws.zip -d /tmp/oc
+RUN unzip -o /tmp/openclinica.zip -d /tmp
+RUN unzip -o /tmp/openclinica-ws.zip -d /tmp
 
 #### Remove default webapps
 RUN rm -rf $CATALINA_HOME/webapps/*
@@ -30,18 +27,18 @@ RUN rm -rf $CATALINA_HOME/webapps/*
 #### Create OpenClinica Home and Install
 RUN mkdir $OC_HOME 
 RUN cd $OC_HOME
-RUN cp /tmp/oc/OpenClinica-$OC_VERSION/distribution/OpenClinica.war .
+RUN cp /tmp/OpenClinica-$OC_VERSION/distribution/OpenClinica.war .
 RUN unzip -o OpenClinica.war -d ${OC_HOME}
 RUN cd ..
 
 #### Create OpenClinica Webapps and Install
 RUN mkdir $OC_WS_HOME
 RUN cd $OC_WS_HOME
-RUN cp /tmp/oc/OpenClinica-ws-$OC_VERSION/distribution/OpenClinica-ws.war .
+RUN cp /tmp/OpenClinica-ws-$OC_VERSION/distribution/OpenClinica-ws.war .
 RUN unzip -o OpenClinica-ws.war -d ${OC_WS_HOME}
 RUN cd ..
 
-RUN rm -rf /tmp/oc
+RUN rm -rf /tmp/*
 
 RUN mkdir $CATALINA_HOME/openclinica.data/xslt -p
 RUN chmod +x /*.sh
