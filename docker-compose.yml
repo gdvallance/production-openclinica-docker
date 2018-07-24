@@ -30,8 +30,6 @@ services:
     environment: 
       - POSTGRES_INITDB_ARGS="-E 'UTF-8'"
       - POSTGRES_PASSWORD=postgres123
-    ports: 
-      - 5432:5432
     volumes: 
       - loomis_ocdb-data:/var/lib/postgresql/data
       - $PWD/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
