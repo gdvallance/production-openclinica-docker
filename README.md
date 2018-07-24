@@ -48,9 +48,9 @@ Otherwise, credit/help is acknowledged in the various sections.
 
 - I don't yet know how to set up `nginx` as I would like. Learning.
 - Useful resources:
-  - [https://www.humankode.com/ssl/how-to-set-up-free-ssl-certificates-from-lets-encrypt-using-docker-and-nginx](https://www.humankode.com/ssl/how-to-set-up-free-ssl-certificates-from-lets-encrypt-using-docker-and-nginx)  -- Very useful overview of using `nginx` and Let's Encrypt (among other things).
+  - [https://www.humankode.com/ssl/how-to-set-up-free-ssl-certificates-from-lets-encrypt-using-docker-and-nginx](https://www.humankode.com/ssl/how-to-set-up-free-ssl-certificates-from-lets-encrypt-using-docker-and-nginx) -- Very useful overview of using `nginx` and Let's Encrypt (among other things).
 
-  - [https://www.thepolyglotdeveloper.com/2017/03/nginx-reverse-proxy-containerized-docker-applications/](https://www.thepolyglotdeveloper.com/2017/03/nginx-reverse-proxy-containerized-docker-applications/)  -- Another approach to proxying. Demonstrates some useful `docker-compose` commands such as `depends_on`.
+  - [https://www.thepolyglotdeveloper.com/2017/03/nginx-reverse-proxy-containerized-docker-applications/](https://www.thepolyglotdeveloper.com/2017/03/nginx-reverse-proxy-containerized-docker-applications/) -- Another approach to proxying. Demonstrates some useful `docker-compose` commands such as `depends_on`.
 
 - [http://www.littlebigextra.com/install-nginx-reverse-proxy-server-docker/](http://www.littlebigextra.com/install-nginx-reverse-proxy-server-docker/)  -- Provides some further useful information.
   
