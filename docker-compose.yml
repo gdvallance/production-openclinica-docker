@@ -13,6 +13,7 @@ services:
   loomis-oc:
     build: ./loomis-oc
     environment:
+      - DATABASE_NAME=loomis
       - LOG_LEVEL=INFO
       - TZ=UTC-1
       - DB_TYPE=postgres 

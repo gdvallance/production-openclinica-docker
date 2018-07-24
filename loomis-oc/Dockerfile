@@ -11,6 +11,7 @@ ENV  OC_HOME              $CATALINA_HOME/webapps/OpenClinica
 ENV  OC_WS_HOME           $CATALINA_HOME/webapps/OpenClinica-ws
 
 ENV  OC_VERSION           3.14
+ENV  DATABASE_NAME        default
 
 COPY run.sh               /run.sh
 
@@ -43,14 +44,9 @@ RUN cd ..
 RUN rm -rf /tmp/oc
 
 RUN mkdir $CATALINA_HOME/openclinica.data/xslt -p
-# RUN mv $CATALINA_HOME/webapps/OpenClinica/WEB-INF/lib/servlet-api-2.3.jar ../ 
 RUN chmod +x /*.sh
 
 ENV  JAVA_OPTS -Xmx1280m -XX:+UseParallelGC -XX:+CMSClassUnloadingEnabled
-
-RUN ls -al $OC_HOME
-RUN mv /usr/local/tomcat/webapps/OpenClinica /usr/local/tomcat/webapps/loomis
-RUN ls -al /usr/local/tomcat/webapps/loomis
 
 CMD ["/run.sh"]
 

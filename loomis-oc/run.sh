@@ -1,4 +1,7 @@
 #!/bin/bash
+echo "mv /usr/local/tomcat/webapps/OpenClinica /usr/local/tomcat/webapps/${DATABASE_NAME}"
+# Move OpenClinica instance to database location
+mv /usr/local/tomcat/webapps/OpenClinica /usr/local/tomcat/webapps/${DATABASE_NAME}
 
 PROPS="${CATALINA_HOME}/webapps/loomis/WEB-INF/classes/datainfo.properties"
 
