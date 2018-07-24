@@ -13,7 +13,7 @@ ENV  OC_WS_HOME           $CATALINA_HOME/webapps/OpenClinica-ws
 ENV  OC_VERSION           3.14
 ENV  DATABASE_NAME        default
 
-ENV LOG_LEVEL             DEBUG
+ENV LOG_LEVEL             INFO
 ENV TZ                    UTC-1
 ENV DB_TYPE               postgres 
 ENV DB_HOST               default
