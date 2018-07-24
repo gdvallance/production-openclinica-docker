@@ -1,9 +1,9 @@
 #!/bin/bash
-echo "mv /usr/local/tomcat/webapps/OpenClinica /usr/local/tomcat/webapps/${DATABASE_NAME}"
+
 # Move OpenClinica instance to database location
 mv /usr/local/tomcat/webapps/OpenClinica /usr/local/tomcat/webapps/${DATABASE_NAME}
 
-PROPS="${CATALINA_HOME}/webapps/loomis/WEB-INF/classes/datainfo.properties"
+PROPS="${CATALINA_HOME}/webapps/${DATABASE_NAME}/WEB-INF/classes/datainfo.properties"
 
 sed -i "/^dbType=.*/c\dbType=$DB_TYPE" ${PROPS}
 sed -i "/^dbUser=.*/c\dbUser=$DB_USER" ${PROPS}
@@ -20,7 +20,7 @@ sed -i "/^designerURL=.*/c\designerURL=" ${PROPS}
 
 cp ${PROPS} ${CATALINA_HOME}/webapps/OpenClinica-ws/WEB-INF/classes/
 
-OC_LOG_PROPS="${CATALINA_HOME}/webapps/loomis/WEB-INF/classes/logging.properties"
+OC_LOG_PROPS="${CATALINA_HOME}/webapps/{DATABASE_NAME}/WEB-INF/classes/logging.properties"
 WS_LOG_PROPS="${CATALINA_HOME}/webapps/OpenClinica-ws/WEB-INF/classes/logging.properties"
 
 if [ -z "$LOG_LEVEL" ]; then
