@@ -97,7 +97,7 @@ Any errors etc., are likely to be mine.
   - If you are NOT using `https://` then delete the following lines:
     - /docker-volumes/etc/letsencrypt/live/ZZZZ/fullchain.pem:/etc/letsencrypt/live/ZZZZ/fullchain.pem
     - /docker-volumes/etc/letsencrypt/live/ZZZZ/privkey.pem:/etc/letsencrypt/live/ZZZZ/privkey.pem
-  - If you ARE using `https://` then replace ZZZZ with the domain name for which you have obtained Let's Encrypt SSL certificates.
+  - If you ARE using `https://` then replace ZZZZ with the domain name for which you have obtained Let's Encrypt SSL certificates as *per* the instructions in the `nginx_letsencrypt.conf` notes below.
   - To create and deploy TWO databases, replace XXXX & YYYY with the names of the databases you wish.
   - To add another OpenClinica database copy and paste the `XXXX-oc` & `XXXX-pg` services and then rename the `XXXX` accordingly.
 
