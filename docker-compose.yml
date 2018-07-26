@@ -1,5 +1,11 @@
 version: '3.6'
 
+# Replace ZZZZ with the domain name of the server. If pure
+# development, then the 2 /docker-volumes/etc/letsencrypt in the
+# nginx-proxy definition  can be deleted.
+
+# Replace XXXX and ZZZZ with the names of the OpenClinica names you want.
+
 services:
 
   nginx-proxy:
@@ -11,8 +17,8 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ./html:/usr/share/nginx/html
       - ./letsencrypt/dh-param/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem
-      - /docker-volumes/etc/letsencrypt/live/databases.oxford-myeloma.org.uk/fullchain.pem:/etc/letsencrypt/live/databases.oxford-myeloma.org.uk/fullchain.pem
-      - /docker-volumes/etc/letsencrypt/live/databases.oxford-myeloma.org.uk/privkey.pem:/etc/letsencrypt/live/databases.oxford-myeloma.org.uk/privkey.pem
+      - /docker-volumes/etc/letsencrypt/live/ZZZZ/fullchain.pem:/etc/letsencrypt/live/ZZZZ/fullchain.pem
+      - /docker-volumes/etc/letsencrypt/live/ZZZZ/privkey.pem:/etc/letsencrypt/live/ZZZZ/privkey.pem
     restart: unless-stopped
 
   loomis-oc:
