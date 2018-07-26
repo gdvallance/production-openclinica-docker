@@ -11,8 +11,8 @@ As of writing (25th July, 2018), both goals have been achieved (more or less). I
 The pattern to support multiple instances of OpenClinica is to have a root URL with databases as branches, <ROOT_URL>/<OPEN_CLINICA_DATABASE>. E.g.
 
 - Landing Page: `databases.oxford-myeloma.org.uk`;
-- Database #1: `databases.oxford-myeloma.org.uk/loomis` and
-- Database #2: `databases.oxford-myeloma.org.uk/panbordex`.
+- Database #1: `databases.oxford-myeloma.org.uk/XXXX` and
+- Database #2: `databases.oxford-myeloma.org.uk/YYYY`.
 
 However, be warned, I **really** don't know what I am doing *yet*. This project is for learning and to get experience. Comments and criticisms welcome. Also this is my first GitHub project of my own ...
 
