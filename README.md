@@ -53,6 +53,13 @@ Any errors etc., are likely to be mine.
 
 ### Adapt code-base
 
+#### General Considerations
+
+- This code-base has three branches: (1) `master`; (2) `develop`; and (3) `production`. **These are NOT used conventionally**.
+  - `master`: a non-functional repository with templates for DEVELOPMENT & PRODUCTION environment and their deployment.
+  - `develop`: a working development environment, suitable for local development on any machine.
+  - `production`: a working production environment, suitable for deployment on a production server.
+
 #### `html` folder
 
 - This folder holds the `html` for the landing page for the installation. I use it as a jumping off point for the various databases of interest.
@@ -62,10 +69,13 @@ Any errors etc., are likely to be mine.
 
 #### `letsencrypt` folder
 
-- This contains the `dh-2048.pem` file used in the SSL certificates.
-- I would delete the existing `dh-param-2048.pem` file and recreate by executing *in the `dh-param` folder*:
+- Delete the `create_your_own_pem_file_and_remove_this.txt` file.
+- Create a suitable  `.pem` file.
+- In project root execute:
 
   ```bash
+  cd letsencrypt/dh-param
+  rm create_your_own_pem_file_and_remove_this.txt
   sudo openssl dhparam -out dhparam-2048.pem 2048
   ```
 
@@ -80,6 +90,7 @@ Any errors etc., are likely to be mine.
 
 #### `docker-compose.yml` file
 
+- The file works in *both* DEVELOPMENT, and PRODUCTION environments. No need to customise.
 - This infrastructure (at this stage) requires 1 nginx proxy `nginx-proxy`; 1 or more OpenClinica (`tomcat`) instances; and 1 or more associated `postgres` instances. In the file there are TWO databases `loomis` and `panbordex`.
 - A complete OpenClinica database requires and OpenClinica (`tomcat`) and `postgres` container.
 - To create and deploy TWO databases, replace XXXX & YYYY with the names of the databases you wish.
@@ -156,17 +167,39 @@ Any errors etc., are likely to be mine.
 - However, if you do change it you will also need to change the environment variable `DB_PASS` in the `Dockerfile` in the `openclinica` folder.
 - One of my TODOs is to implement the `DB_PASS` environment variable into this file so that it can be properly overridden in the `docker-compose.yml` file.
 
-#### `nginx.conf` file
+#### `nginx_development.conf` file
 
-- The `nginx.conf` file requires a THREE stage evolution (to get to where it is at currently.)
-  - Development *without* `https://`
-  - Obtaining the SSL certificates from Let's Encrypt.
-  - Re-configuring for `https://` support.
+- The `nginx_development.conf` file is a template for a local development environment based on `localhost`. It does not support `https://`
+- To implement, rename to `nginx.conf`
 
-- How this is done will be described later, but those familiar with `nginx` or those who can read documentation can work it out ...
+### `nginx_letsencrypt.conf` file
+
+- The `nginx_letsencrypt.conf` file is a template that is needed to obtain Let's Encrypt SSL files.
+- To implement, rename to `nginx.conf` and then customise according to the instructions.
+- Spin up the infrastructure and once running execute in project root after replacing YOUR_EMAIL_ADDRESS and YOUR_EMAIL with your values:
+
+  ```docker
+  sudo docker run -it --rm \
+  -v /docker-volumes/etc/letsencrypt:/etc/letsencrypt \
+  -v /docker-volumes/var/lib/letsencrypt:/var/lib/letsencrypt \
+  -v /home/gdvallance/production-openclinica-docker/html:/data/letsencrypt \
+  -v "/docker-volumes/var/log/letsencrypt:/var/log/letsencrypt" \
+  certbot/certbot \
+  certonly --webroot \
+  --email YOUR_EMAIL_ADDRESS --agree-tos --no-eff-email \
+  --webroot-path=/data/letsencrypt \
+  -d YOUR_DOMAIN
+  ```
+
+#### `nginx_production.conf` file
+
+- The `nginx_production.conf` file is a template for a production environment based on a deployment on a server that already has DNS for the domain name sorted.
+- **IT DEPENDS ON** `nginx_letsencrypt.conf` being used and the Let's Encrypt SSL certificates being obtained. In other words, you will need to spin up the containers, obtain the certificates, and spin them down before customizing.
+- To implement, following the instructions in the comments and rename to `nginx.conf`.
 
 ### Build and pull down images and spin up containers
 
+- Once the appropriate customization's as *per* instructions are done then.
 - In project root:
 
   ```bash
