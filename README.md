@@ -177,7 +177,7 @@ volumes:
 - The `nginx_development.conf` file is a template for a local development environment based on `localhost`. It does not support `https://`
 - To implement, rename to `nginx.conf`
 
-### `nginx_letsencrypt.conf` file
+#### `nginx_letsencrypt.conf` file
 
 - The `nginx_letsencrypt.conf` file is a template that is needed to obtain Let's Encrypt SSL files.
 - To implement, rename to `nginx.conf` and then customise according to the instructions.
