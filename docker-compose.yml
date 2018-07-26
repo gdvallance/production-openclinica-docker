@@ -1,7 +1,8 @@
 version: '3.6'
 
 # Replace ZZZZ with the domain name of the server. If pure
-# development, then the 2 /docker-volumes/... can be deleted.
+# development, then the 2 /docker-volumes/etc/letsencrypt in the
+# nginx-proxy definition  can be deleted.
 
 # Replace XXXX and ZZZZ with the names of the OpenClinica names you want.
 
