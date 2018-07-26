@@ -181,7 +181,7 @@ volumes:
 
 - The `nginx_letsencrypt.conf` file is a template that is needed to obtain Let's Encrypt SSL files.
 - To implement, rename to `nginx.conf` and then customise according to the instructions.
-- Spin up the infrastructure and once running execute in project root after replacing YOUR_EMAIL_ADDRESS and YOUR_EMAIL with your values:
+- Spin up the infrastructure and once running execute in project root after replacing YOUR_EMAIL_ADDRESS and YOUR_DOMAIN with your values:
 
   ```docker
   sudo docker run -it --rm \
