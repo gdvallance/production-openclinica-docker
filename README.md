@@ -175,12 +175,12 @@ volumes:
 #### `nginx_development.conf` file
 
 - The `nginx_development.conf` file is a template for a local development environment based on `localhost`. It does not support `https://`
-- To implement, rename to `nginx.conf`
+- To implement, follow the instructions in the file and rename to `nginx.conf`
 
 #### `nginx_letsencrypt.conf` file
 
 - The `nginx_letsencrypt.conf` file is a template that is needed to obtain Let's Encrypt SSL files.
-- To implement, rename to `nginx.conf` and then customise according to the instructions.
+- To implement, rename to `nginx.conf` and then customise according to the instructions in the file. Then ...
 - Spin up the infrastructure and once running execute in project root after replacing YOUR_EMAIL_ADDRESS and YOUR_DOMAIN with your values:
 
   ```docker
@@ -196,11 +196,13 @@ volumes:
   -d YOUR_DOMAIN
   ```
 
+- For how this works please see: [https://www.humankode.com/ssl/how-to-set-up-free-ssl-certificates-from-lets-encrypt-using-docker-and-nginx](https://www.humankode.com/ssl/how-to-set-up-free-ssl-certificates-from-lets-encrypt-using-docker-and-nginx)
+
 #### `nginx_production.conf` file
 
 - The `nginx_production.conf` file is a template for a production environment based on a deployment on a server that already has DNS for the domain name sorted.
-- **IT DEPENDS ON** `nginx_letsencrypt.conf` being used and the Let's Encrypt SSL certificates being obtained. In other words, you will need to spin up the containers, obtain the certificates, and spin them down before customizing.
-- To implement, following the instructions in the comments and rename to `nginx.conf`.
+- **IT DEPENDS ON** `nginx_letsencrypt.conf` above being used. Specifically, `nginx_production.conf` depends on the Let's Encrypt SSL certificates being obtained, which can be done if the steps above are followed. Once done then ...
+- To implement, follow the instructions in the comments in the file and rename to `nginx.conf`.
 
 ### Build and pull down images and spin up containers
 
