@@ -191,6 +191,8 @@ Any errors etc., are likely to be mine.
 
 - If the host machine is re-booted or shutdown without the containers being shutdown first, then you can get a 'Waiting for changelog lock' error. This is caused by a corrupted table on `postgres` giving `liquibase` a hissy-fit. See: [https://stackoverflow.com/questions/15528795/liquibase-lock-reasons](https://stackoverflow.com/questions/15528795/liquibase-lock-reasons). Have not tested an elegant fix. You can resolve the error by bring down the containers and deleting the `postgres` persistance volume. E.g. `panbordex_ocdb-data` and restoring from backups if you have them.
 
+- Webservices are installed in theory but have not been tested if they work. Unlikely that they do. Getting these operational is on the TODO list.
+
 ## References
 
 - [https://github.com/JensPiegsa/OpenClinica](https://github.com/JensPiegsa/OpenClinica) -- This was the foundation of the project. I initially used the image from the Docker Repository (see below) however, for various reasons I had to re-develop and build a later version, but it was through adapting Jens' code, especially his `Dockerfile` and `run.sh`.
