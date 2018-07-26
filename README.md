@@ -90,11 +90,16 @@ Any errors etc., are likely to be mine.
 
 #### `docker-compose.yml` file
 
-- The file works in *both* DEVELOPMENT, and PRODUCTION environments. No need to customise.
-- This infrastructure (at this stage) requires 1 nginx proxy `nginx-proxy`; 1 or more OpenClinica (`tomcat`) instances; and 1 or more associated `postgres` instances. In the file there are TWO databases `loomis` and `panbordex`.
+- The file works in *both* DEVELOPMENT, and PRODUCTION environments.
+- This infrastructure (at this stage) requires 1 nginx proxy `nginx-proxy`; 1 or more OpenClinica (`tomcat`) instances; and 1 or more associated `postgres` instances.
 - A complete OpenClinica database requires and OpenClinica (`tomcat`) and `postgres` container.
-- To create and deploy TWO databases, replace XXXX & YYYY with the names of the databases you wish.
-- To add another OpenClinica database copy and paste the `XXXX-oc` & `XXXX-pg` services and then rename the `XXXX` accordingly.
+- In the file below:
+  - If you are NOT using `https://` then delete the following lines:
+    - /docker-volumes/etc/letsencrypt/live/ZZZZ/fullchain.pem:/etc/letsencrypt/live/ZZZZ/fullchain.pem
+    - /docker-volumes/etc/letsencrypt/live/ZZZZ/privkey.pem:/etc/letsencrypt/live/ZZZZ/privkey.pem
+  - If you ARE using `https://` then replace ZZZZ with the domain name for which you have obtained Let's Encrypt SSL certificates.
+  - To create and deploy TWO databases, replace XXXX & YYYY with the names of the databases you wish.
+  - To add another OpenClinica database copy and paste the `XXXX-oc` & `XXXX-pg` services and then rename the `XXXX` accordingly.
 
   ```yml
   version: '3.6'
@@ -110,8 +115,8 @@ Any errors etc., are likely to be mine.
         - ./nginx.conf:/etc/nginx/conf.d/default.conf
         - ./html:/usr/share/nginx/html
         - ./letsencrypt/dh-param/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem
-        - /docker-volumes/etc/letsencrypt/live/databases.oxford-myeloma.org.uk/fullchain.pem:/etc/letsencrypt/live/databases.oxford-myeloma.org.uk/fullchain.pem
-        - /docker-volumes/etc/letsencrypt/live/databases.oxford-myeloma.org.uk/privkey.pem:/etc/letsencrypt/live/databases.oxford-myeloma.org.uk/privkey.pem
+        - /docker-volumes/etc/letsencrypt/live/ZZZZ/fullchain.pem:/etc/letsencrypt/live/ZZZZ/fullchain.pem
+        - /docker-volumes/etc/letsencrypt/live/ZZZZ/privkey.pem:/etc/letsencrypt/live/ZZZZ/privkey.pem
       restart: unless-stopped
 
     XXXX-oc:
