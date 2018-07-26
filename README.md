@@ -101,68 +101,68 @@ Any errors etc., are likely to be mine.
   - To create and deploy TWO databases, replace XXXX & YYYY with the names of the databases you wish.
   - To add another OpenClinica database copy and paste the `XXXX-oc` & `XXXX-pg` services and then rename the `XXXX` accordingly. Then add the pertinent entries in the volumes section.
 
-  ```yml
-  version: '3.6'
+```yml
+version: '3.6'
 
-  services:
+services:
 
-    nginx-proxy:
-      image: nginx:latest
-      ports:
-        - "80:80"
-        - "443:443"
-      volumes:
-        - ./nginx.conf:/etc/nginx/conf.d/default.conf
-        - ./html:/usr/share/nginx/html
-        - ./letsencrypt/dh-param/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem
-        - /docker-volumes/etc/letsencrypt/live/ZZZZ/fullchain.pem:/etc/letsencrypt/live/ZZZZ/fullchain.pem
-        - /docker-volumes/etc/letsencrypt/live/ZZZZ/privkey.pem:/etc/letsencrypt/live/ZZZZ/privkey.pem
-      restart: unless-stopped
+  nginx-proxy:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./html:/usr/share/nginx/html
+      - ./letsencrypt/dh-param/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem
+      - /docker-volumes/etc/letsencrypt/live/ZZZZ/fullchain.pem:/etc/letsencrypt/live/ZZZZ/fullchain.pem
+      - /docker-volumes/etc/letsencrypt/live/ZZZZ/privkey.pem:/etc/letsencrypt/live/ZZZZ/privkey.pem
+    restart: unless-stopped
 
-    XXXX-oc:
-      build: ./openclinica
-      environment:
-        - DATABASE_NAME=XXXX
-        - DB_HOST=XXXX-pg  
-      volumes:
-        - XXXX_oc-data:/usr/local/tomcat/openclinica.data
-      restart: unless-stopped
+  XXXX-oc:
+    build: ./openclinica
+    environment:
+      - DATABASE_NAME=XXXX
+      - DB_HOST=XXXX-pg  
+    volumes:
+      - XXXX_oc-data:/usr/local/tomcat/openclinica.data
+    restart: unless-stopped
 
-    XXXX-pg:
-      image: postgres:9.5
-      environment:
-        - POSTGRES_INITDB_ARGS="-E 'UTF-8'"
-        - POSTGRES_PASSWORD=postgres123
-      volumes:
-        - XXXX_ocdb-data:/var/lib/postgresql/data
-        - $PWD/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
-      restart: unless-stopped
+  XXXX-pg:
+    image: postgres:9.5
+    environment:
+      - POSTGRES_INITDB_ARGS="-E 'UTF-8'"
+      - POSTGRES_PASSWORD=postgres123
+    volumes:
+      - XXXX_ocdb-data:/var/lib/postgresql/data
+      - $PWD/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+    restart: unless-stopped
 
-    YYYY-oc:
-      build: ./openclinica
-      environment:
-        - DATABASE_NAME=YYYY
-        - DB_HOST=YYYY-pg
-      volumes:
-        - YYYY_oc-data:/usr/local/tomcat/openclinica.data
-      restart: unless-stopped
+  YYYY-oc:
+    build: ./openclinica
+    environment:
+      - DATABASE_NAME=YYYY
+      - DB_HOST=YYYY-pg
+    volumes:
+      - YYYY_oc-data:/usr/local/tomcat/openclinica.data
+    restart: unless-stopped
 
-    YYYY-pg:
-      image: postgres:9.5
-      environment:
-        - POSTGRES_INITDB_ARGS="-E 'UTF-8'"
-        - POSTGRES_PASSWORD=postgres123
-      volumes:
-        - YYYY_ocdb-data:/var/lib/postgresql/data
-        - $PWD/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
-      restart: unless-stopped
+  YYYY-pg:
+    image: postgres:9.5
+    environment:
+      - POSTGRES_INITDB_ARGS="-E 'UTF-8'"
+      - POSTGRES_PASSWORD=postgres123
+    volumes:
+      - YYYY_ocdb-data:/var/lib/postgresql/data
+      - $PWD/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+    restart: unless-stopped
 
-  volumes:
-    XXXX_oc-data:
-    XXXX_ocdb-data:
-    YYYY_oc-data:
-    YYYY_ocdb-data:
-  ```
+volumes:
+  XXXX_oc-data:
+  XXXX_ocdb-data:
+  YYYY_oc-data:
+  YYYY_ocdb-data:
+```
 
 - You may wish to change the `POSTGRES_PASSWORD` environment variable to something different. However, bear in mind the `postgres` instances are NOT exposed to the host.
 
