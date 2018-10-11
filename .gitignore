@@ -23,3 +23,6 @@ hs_err_pid*
 
 # Don't include editor configurations for Visual Studio Code
 .vscode
+
+# Don't include Jetbrains configurations ...
+.idea
