@@ -219,6 +219,30 @@ volumes:
 
   **NB**: The images (even when present) and the containers can take a long time to spin up -- 2-5 min. *May* be shorter, but don't count on it. Using `docker-compose up` is useful to see when things complete.
 
+### `https:// and Let's Encrypt`
+
+- The SSL certificate from Let's Encrypt will expire unless renewed manually or functionality developed to do so automatically.
+- For the latter there is some instructions in: [https://www.humankode.com/ssl/how-to-set-up-free-ssl-certificates-from-lets-encrypt-using-docker-and-nginx](https://www.humankode.com/ssl/how-to-set-up-free-ssl-certificates-from-lets-encrypt-using-docker-and-nginx)
+- When I have implemented it for myself I will update the documentation accordingly.
+
+- For the former you can do the following (tried and tested):
+  - In the project root execute (replacing `YOUR_EMAIL_ADDRESS`, `YOUR_DOMAIN` & `NAME_OF_YOUR_NGINX_PROXY_SERVICE` with your values):
+
+```bash
+  sudo docker run -it --rm \
+  -v /docker-volumes/etc/letsencrypt:/etc/letsencrypt \
+  -v /docker-volumes/var/lib/letsencrypt:/var/lib/letsencrypt \
+  -v /home/gdvallance/production-openclinica-docker/html:/data/letsencrypt \
+  -v "/docker-volumes/var/log/letsencrypt:/var/log/letsencrypt" \
+  certbot/certbot \
+  certonly --webroot \
+  --email YOUR_EMAIL_ADDRESS --agree-tos --no-eff-email \
+  --webroot-path=/data/letsencrypt \
+  -d YOUR_DOMAIN
+
+  docker-compose restart NAME_OF_YOUR_NGINX_PROXY_SERVICE
+  ```
+
 ### WARNINGS
 
 - This is still a work in progress.
