@@ -181,13 +181,13 @@ volumes:
 
 - The `nginx_letsencrypt.conf` file is a template that is needed to obtain Let's Encrypt SSL files.
 - To implement, rename to `nginx.conf` and then customise according to the instructions in the file. Then ...
-- Spin up the infrastructure and once running execute in project root after replacing YOUR_EMAIL_ADDRESS and YOUR_DOMAIN with your values:
+- Spin up the infrastructure and once running execute in project root after replacing DIRECTORY_WHERE_PROJECT_CLONED, YOUR_EMAIL_ADDRESS and YOUR_DOMAIN with your values:
 
   ```docker
   sudo docker run -it --rm \
   -v /docker-volumes/etc/letsencrypt:/etc/letsencrypt \
   -v /docker-volumes/var/lib/letsencrypt:/var/lib/letsencrypt \
-  -v /home/gdvallance/production-openclinica-docker/html:/data/letsencrypt \
+  -v /DIRECTORY_WHERE_PROJECT_CLONED/production-openclinica-docker/html:/data/letsencrypt \
   -v "/docker-volumes/var/log/letsencrypt:/var/log/letsencrypt" \
   certbot/certbot \
   certonly --webroot \
@@ -226,13 +226,13 @@ volumes:
 - When I have implemented it for myself I will update the documentation accordingly.
 
 - For the former you can do the following (tried and tested):
-  - In the project root execute (replacing `YOUR_EMAIL_ADDRESS`, `YOUR_DOMAIN` & `NAME_OF_YOUR_NGINX_PROXY_SERVICE` with your values):
+  - In the project root execute (replacing `DIRECTORY_WHERE_PROJECT_CLONED`, `YOUR_EMAIL_ADDRESS`, `YOUR_DOMAIN` & `NAME_OF_YOUR_NGINX_PROXY_SERVICE` with your values):
 
 ```bash
   sudo docker run -it --rm \
   -v /docker-volumes/etc/letsencrypt:/etc/letsencrypt \
   -v /docker-volumes/var/lib/letsencrypt:/var/lib/letsencrypt \
-  -v /home/gdvallance/production-openclinica-docker/html:/data/letsencrypt \
+  -v /DIRECTORY_WHERE_PROJECT_CLONED/production-openclinica-docker/html:/data/letsencrypt \
   -v "/docker-volumes/var/log/letsencrypt:/var/log/letsencrypt" \
   certbot/certbot \
   certonly --webroot \
