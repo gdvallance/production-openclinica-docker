@@ -32,6 +32,7 @@ else
   echo "org.apache.catalina.core.ContainerBase.[Catalina].handlers = java.util.logging.ConsoleHandler" >> ${WS_LOG_PROPS}
 fi
 
+# Wait until the OpenClinica postgres database is ready before proceeding.
 until PGPASSWORD=$DB_PASS psql -h $DB_HOST -U $DB_USER $DB_NAME -c '\q';
 do 
   >&2 echo "Postgres is unavailable"
