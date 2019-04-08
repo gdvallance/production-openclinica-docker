@@ -32,4 +32,11 @@ else
   echo "org.apache.catalina.core.ContainerBase.[Catalina].handlers = java.util.logging.ConsoleHandler" >> ${WS_LOG_PROPS}
 fi
 
+until PGPASSWORD=$DB_PASS psql -h $DB_HOST -U $DB_USER $DB_NAME -c '\q';
+do 
+  >&2 echo "Postgres is unavailable"
+  sleep 1
+done
+  >&2 echo "Postgres is up"
+
 exec ${CATALINA_HOME}/bin/catalina.sh run

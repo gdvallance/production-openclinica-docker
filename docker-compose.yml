@@ -9,6 +9,8 @@ version: '3.6'
 services:
 
   nginx-proxy:
+    depends_on:
+      - test-oc
     image: nginx:latest
     ports:
       - "80:80"
@@ -17,50 +19,31 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ./html:/usr/share/nginx/html
       - ./letsencrypt/dh-param/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem
-      - /docker-volumes/etc/letsencrypt/live/ZZZZ/fullchain.pem:/etc/letsencrypt/live/ZZZZ/fullchain.pem
-      - /docker-volumes/etc/letsencrypt/live/ZZZZ/privkey.pem:/etc/letsencrypt/live/ZZZZ/privkey.pem
+      - /docker-volumes/etc/letsencrypt/live/test/fullchain.pem:/etc/letsencrypt/live/test/fullchain.pem
+      - /docker-volumes/etc/letsencrypt/live/test/privkey.pem:/etc/letsencrypt/live/test/privkey.pem
     restart: unless-stopped
 
-  XXXX-oc:
+  test-oc:
+    depends_on:
+      - test-pg
     build: ./openclinica
     environment:
-      - DATABASE_NAME=XXXX 
-      - DB_HOST=XXXX-pg  
+      - DATABASE_NAME=test 
+      - DB_HOST=test-pg  
     volumes: 
-      - XXXX_oc-data:/usr/local/tomcat/openclinica.data
+      - test_oc-data:/usr/local/tomcat/openclinica.data
     restart: unless-stopped
 
-  XXXX-pg:
+  test-pg:
     image: postgres:9.5
     environment: 
       - POSTGRES_INITDB_ARGS="-E 'UTF-8'"
       - POSTGRES_PASSWORD=postgres123
     volumes: 
-      - XXXX_ocdb-data:/var/lib/postgresql/data
-      - $PWD/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
-    restart: unless-stopped
-
-  YYYY-oc:
-    build: ./openclinica
-    environment:
-      - DATABASE_NAME=YYYY
-      - DB_HOST=YYYY-pg
-    volumes: 
-      - YYYY_oc-data:/usr/local/tomcat/openclinica.data
-    restart: unless-stopped
-
-  YYYY-pg:
-    image: postgres:9.5
-    environment: 
-      - POSTGRES_INITDB_ARGS="-E 'UTF-8'"
-      - POSTGRES_PASSWORD=postgres123
-    volumes: 
-      - YYYY_ocdb-data:/var/lib/postgresql/data
+      - test_ocdb-data:/var/lib/postgresql/data
       - $PWD/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
     restart: unless-stopped
 
 volumes:
-  XXXX_oc-data:
-  XXXX_ocdb-data:
-  YYYY_oc-data:
-  YYYY_ocdb-data:
+  test_oc-data:
+  test_ocdb-data:

@@ -28,7 +28,9 @@ COPY run.sh               /run.sh
 COPY openclinica.zip /tmp/openclinica.zip
 COPY openclinica-ws.zip /tmp/openclinica-ws.zip
 
-RUN unzip -o /tmp/openclinica.zip -d /tmp && \
+RUN apt-get update && \
+    apt-get install -y postgresql-client && \
+    unzip -o /tmp/openclinica.zip -d /tmp && \
     unzip -o /tmp/openclinica-ws.zip -d /tmp && \ 
     rm -rf $CATALINA_HOME/webapps/* && \
     mkdir $OC_HOME && \
