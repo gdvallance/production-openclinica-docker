@@ -26,7 +26,7 @@ services:
   test-oc:
     depends_on:
       - test-pg
-    build: ./openclinica
+    image: gdvallance/openclinica_3.14:latest
     environment:
       - DATABASE_NAME=test 
       - DB_HOST=test-pg  
