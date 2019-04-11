@@ -31,7 +31,7 @@ services:
       - DATABASE_NAME=test 
       - DB_HOST=test-pg  
     volumes: 
-      - test_oc-data:/usr/local/tomcat/openclinica.data
+      - test_oc-data:/usr/local/tomcat/test.data
     restart: unless-stopped
 
   test-pg:
