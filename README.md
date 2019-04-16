@@ -55,10 +55,9 @@ Any errors etc., are likely to be mine.
 
 #### General Considerations
 
-- This code-base has three branches: (1) `master`; (2) `develop`; and (3) `production`. **These are NOT used conventionally**.
+- This code-base has two branches: (1) `master`; and (2) `develop`. **These are NOT used conventionally**.
   - `master`: a non-functional repository with templates for DEVELOPMENT & PRODUCTION environment and their deployment.
   - `develop`: a working development environment, suitable for local development on any machine.
-  - `production`: a working production environment, suitable for deployment on a production server.
 
 #### `html` folder
 
